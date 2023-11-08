@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.libreria.dto.LectorDto;
 import pe.edu.upeu.libreria.entity.LectorEntity;
 import pe.edu.upeu.libreria.service.LectorService;
 
@@ -11,8 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
 @RequestMapping("/api/LECTOR")
+@CrossOrigin({"http://localhost:4200"})
 public class LectorController {
     @Autowired
     private LectorService lectorService;
@@ -30,7 +33,7 @@ public class LectorController {
     }
 
     @PostMapping("/addLector") // POST
-    public ResponseEntity<Object> crearLector(@RequestBody LectorEntity lector) {
+    public ResponseEntity<Object> crearLector(@RequestBody LectorDto lector) {
         LectorEntity existeDni = lectorService.buscarLectorPorID(lector.getDnilector());
         if (existeDni == null) {
             LectorEntity newLector = lectorService.guardarLector(lector);
@@ -48,7 +51,7 @@ public class LectorController {
     }
 
     @PutMapping("/updateLector/{dnilector}") //PUT
-    public ResponseEntity<LectorEntity> updateLector(@PathVariable Integer dnilector, @RequestBody LectorEntity newLector){
+    public ResponseEntity<LectorEntity> updateLector(@PathVariable Integer dnilector, @RequestBody LectorDto newLector){
         LectorEntity updateLector = lectorService.editarLector(dnilector, newLector);
         if (updateLector != null){
             return new ResponseEntity<>(updateLector, HttpStatus.OK);

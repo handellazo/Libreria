@@ -24,13 +24,13 @@ public class AlquilerEntity implements Serializable {
     @Column(name = "ALQUILER")
     private String alquiler;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_LECTOR")
-    private LectorEntity id_lector;
+    @ManyToOne //FK
+    @JoinColumn(name = "DNILECTOR")
+    private LectorEntity dni_lector;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_LIBRO")
-    private LibroEntity libro;
+    @ManyToOne //FK
+    @JoinColumn(name = "ASIN")
+    private LibroEntity id_asin;
 
     @Column(name = "FECHASALIDA")
     private Date salida;

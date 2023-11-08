@@ -24,8 +24,4 @@ public class CategoriaEntity implements Serializable {
 
     @Column(name = "CATEGORIA")
     private String categoria;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "categoria")
-    @JsonIgnore
-    private Set<LibroEntity> categorias;
 }

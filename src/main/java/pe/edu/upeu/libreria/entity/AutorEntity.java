@@ -21,7 +21,7 @@ public class AutorEntity implements Serializable {
     @Column(name = "IDAUTOR")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqAutor")
     @SequenceGenerator(sequenceName = "SEQ_AUTOR", allocationSize = 1, name = "seqAutor")
-    private Integer IDAUTOR;
+    private Integer idautor;
 
     @Column(name = "AUTOR")
     private String autor;

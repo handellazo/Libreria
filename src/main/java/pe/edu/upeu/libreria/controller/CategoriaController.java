@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.libreria.dto.CategoriaDto;
 import pe.edu.upeu.libreria.entity.CategoriaEntity;
 import pe.edu.upeu.libreria.service.CategoriaService;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/CATEGORIA")
+@CrossOrigin(origins = {"http://localhost:4200, http://localhost:8080 "})
 public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
@@ -22,7 +24,7 @@ public class CategoriaController {
     }
 
     @PostMapping("/addCategoria")
-    public ResponseEntity<CategoriaEntity> crearCategoria(@RequestBody CategoriaEntity categoria){
+    public ResponseEntity<CategoriaEntity> crearCategoria(@RequestBody CategoriaDto categoria){
         CategoriaEntity newCategoria = categoriaService.guardarCategoria(categoria);
         if (newCategoria != null){
             return new ResponseEntity<>(newCategoria, HttpStatus.CREATED);
@@ -32,7 +34,7 @@ public class CategoriaController {
     }
 
     @PutMapping("/updateCategoria/{idcategoria}") //PUT
-    public ResponseEntity<CategoriaEntity> updateCategoria(@PathVariable Integer idcategoria, @RequestBody CategoriaEntity newCategoria){
+    public ResponseEntity<CategoriaEntity> updateCategoria(@PathVariable Integer idcategoria, @RequestBody CategoriaDto newCategoria){
         CategoriaEntity updateCategoria = categoriaService.editarCategoria(idcategoria, newCategoria);
         if (updateCategoria != null){
             return new ResponseEntity<>(updateCategoria, HttpStatus.OK);

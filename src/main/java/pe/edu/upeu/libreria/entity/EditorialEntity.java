@@ -24,8 +24,4 @@ public class EditorialEntity implements Serializable {
     @Column(name = "EDITORIAL")
     private String editorial;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "editorial")
-    @JsonIgnore
-    private Set<LibroEntity> editoriales;
-
 }

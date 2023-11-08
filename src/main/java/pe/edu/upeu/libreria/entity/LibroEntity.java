@@ -25,17 +25,17 @@ public class LibroEntity implements Serializable {
     @Column(name = "FECHALANZAMIENTO")
     private Date lanzamiento;
 
-    @ManyToOne
+    @ManyToOne //FK
     @JoinColumn(name = "IDAUTOR")
     private AutorEntity id_autor;
 
-    @ManyToOne
+    @ManyToOne //FK
     @JoinColumn(name = "IDCATEGORIA")
-    private CategoriaEntity categoria;
+    private CategoriaEntity id_categoria;
 
-    @ManyToOne
+    @ManyToOne //FK
     @JoinColumn(name = "IDEDITORIAL")
-    private EditorialEntity editorial;
+    private EditorialEntity id_editorial;
 
     @Column(name = "IDIOMA")
     private String idioma;

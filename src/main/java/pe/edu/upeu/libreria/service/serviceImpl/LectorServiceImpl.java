@@ -3,6 +3,7 @@ package pe.edu.upeu.libreria.service.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import pe.edu.upeu.libreria.dto.LectorDto;
 import pe.edu.upeu.libreria.entity.LectorEntity;
 import pe.edu.upeu.libreria.repository.LectorInterface;
 import pe.edu.upeu.libreria.service.LectorService;
@@ -25,30 +26,30 @@ public class LectorServiceImpl implements LectorService {
     }
 
     @Override
-    public LectorEntity guardarLector(LectorEntity lectorEntity) {
+    public LectorEntity guardarLector(LectorDto lectorDto) {
         try {
             LectorEntity nuevoLector = new LectorEntity();
-            nuevoLector.setDnilector(lectorEntity.getDnilector());
-            nuevoLector.setNombre(lectorEntity.getNombre());
-            nuevoLector.setTelefono(lectorEntity.getTelefono());
-            nuevoLector.setDireccion(lectorEntity.getDireccion());
-            nuevoLector.setCodigopostal(lectorEntity.getCodigopostal());
-            nuevoLector.setObservaciones(lectorEntity.getObservaciones());
+            nuevoLector.setDnilector(lectorDto.getDnilector());
+            nuevoLector.setNombre(lectorDto.getNombre());
+            nuevoLector.setTelefono(lectorDto.getTelefono());
+            nuevoLector.setDireccion(lectorDto.getDireccion());
+            nuevoLector.setCodigopostal(lectorDto.getCodigopostal());
+            nuevoLector.setObservaciones(lectorDto.getObservaciones());
             return lectorInterface.save(nuevoLector);
         } catch (DataIntegrityViolationException e){
-            throw new IllegalArgumentException("Se repite el Dni pe causa: " + e);
+            throw new IllegalArgumentException("El DNI ya existe: " + e);
         }
     }
 
     @Override
-    public LectorEntity editarLector(int dnilector, LectorEntity lectorEntity) {
+    public LectorEntity editarLector(int dnilector, LectorDto lectorDto) {
         LectorEntity lectorEncontrado = lectorInterface.findById(dnilector).orElse(null);
         if (lectorEncontrado != null){
-            lectorEncontrado.setNombre(lectorEntity.getNombre());
-            lectorEncontrado.setTelefono(lectorEntity.getTelefono());
-            lectorEncontrado.setDireccion(lectorEntity.getDireccion());
-            lectorEncontrado.setCodigopostal(lectorEntity.getCodigopostal());
-            lectorEncontrado.setObservaciones(lectorEntity.getObservaciones());
+            lectorEncontrado.setNombre(lectorDto.getNombre());
+            lectorEncontrado.setTelefono(lectorDto.getTelefono());
+            lectorEncontrado.setDireccion(lectorDto.getDireccion());
+            lectorEncontrado.setCodigopostal(lectorDto.getCodigopostal());
+            lectorEncontrado.setObservaciones(lectorDto.getObservaciones());
 
             return lectorInterface.save(lectorEncontrado);
         }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.libreria.dto.AlquilerDto;
 import pe.edu.upeu.libreria.entity.AlquilerEntity;
 import pe.edu.upeu.libreria.service.AlquilerService;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/ALQUILER")
+@CrossOrigin(origins = {"http://localhost:4200, http://localhost:8080 "})
 public class AlquilerController {
     @Autowired
     private AlquilerService alquilerService;
@@ -29,7 +31,7 @@ public class AlquilerController {
     }
 
     @PostMapping("/addAlquiler") // POST
-    public ResponseEntity<AlquilerEntity> crearAlquiler(@RequestBody AlquilerEntity alquiler){
+    public ResponseEntity<AlquilerEntity> crearAlquiler(@RequestBody AlquilerDto alquiler){
         AlquilerEntity newAlquiler = alquilerService.guardarAlquiler(alquiler);
         if (newAlquiler != null){
             return new ResponseEntity<>(newAlquiler, HttpStatus.CREATED);
@@ -39,7 +41,7 @@ public class AlquilerController {
     }
 
     @PutMapping("/updateAlquiler/{idalquiler}") //PUT
-    public ResponseEntity<AlquilerEntity> updateAlquiler(@PathVariable Integer idalquiler, @RequestBody AlquilerEntity newAlquiler){
+    public ResponseEntity<AlquilerEntity> updateAlquiler(@PathVariable Integer idalquiler, @RequestBody AlquilerDto newAlquiler){
         AlquilerEntity updateAlquiler = alquilerService.editarAlquiler(idalquiler, newAlquiler);
         if (updateAlquiler != null){
             return new ResponseEntity<>(updateAlquiler, HttpStatus.OK);

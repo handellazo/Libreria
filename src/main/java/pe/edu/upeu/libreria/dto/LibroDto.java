@@ -3,9 +3,6 @@ package pe.edu.upeu.libreria.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pe.edu.upeu.libreria.entity.AutorEntity;
-import pe.edu.upeu.libreria.entity.CategoriaEntity;
-import pe.edu.upeu.libreria.entity.EditorialEntity;
 
 import java.util.Date;
 
@@ -22,9 +19,9 @@ public class LibroDto {
 
     private Integer id_autor; //FK
 
-    private Integer categoria; //FK
+    private Integer id_categoria; //FK
 
-    private Integer editorial; //FK
+    private Integer id_editorial; //FK
 
     private String idioma;
 

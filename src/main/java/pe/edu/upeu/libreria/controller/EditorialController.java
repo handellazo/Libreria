@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.libreria.dto.EditorialDto;
 import pe.edu.upeu.libreria.entity.EditorialEntity;
 import pe.edu.upeu.libreria.service.EditorialService;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/EDITORIAL")
+@CrossOrigin(origins = {"http://localhost:4200, http://localhost:8080 "})
 public class EditorialController {
     @Autowired
     private EditorialService editorialService;
@@ -22,7 +24,7 @@ public class EditorialController {
     }
 
     @PostMapping("/addEditorial")
-    public ResponseEntity<EditorialEntity> crearEditorial(@RequestBody EditorialEntity editorial){
+    public ResponseEntity<EditorialEntity> crearEditorial(@RequestBody EditorialDto editorial){
         EditorialEntity newEditorial = editorialService.guardarEditorial(editorial);
         if (newEditorial != null){
             return new ResponseEntity<>(newEditorial, HttpStatus.CREATED);
@@ -32,7 +34,7 @@ public class EditorialController {
     }
 
     @PutMapping("/updateEditorial/{ideditorial}") //PUT
-    public ResponseEntity<EditorialEntity> updateEditorial(@PathVariable Integer ideditorial, @RequestBody EditorialEntity newEditorial){
+    public ResponseEntity<EditorialEntity> updateEditorial(@PathVariable Integer ideditorial, @RequestBody EditorialDto newEditorial){
         EditorialEntity updateEditorial = editorialService.editarEditorial(ideditorial, newEditorial);
         if (updateEditorial != null){
             return new ResponseEntity<>(updateEditorial, HttpStatus.OK);

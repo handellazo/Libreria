@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upeu.libreria.dto.AutorDto;
 import pe.edu.upeu.libreria.entity.AutorEntity;
 import pe.edu.upeu.libreria.service.AutorService;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/AUTOR")
+@CrossOrigin(origins = {"http://localhost:4200, http://localhost:8080 "})
 public class AutorController {
     @Autowired
     private AutorService autorService;
@@ -22,7 +24,7 @@ public class AutorController {
     }
 
     @PostMapping("/addAutor")
-    public ResponseEntity<AutorEntity> crearAutor(@RequestBody AutorEntity autor){
+    public ResponseEntity<AutorEntity> crearAutor(@RequestBody AutorDto autor){
         AutorEntity newAutor = autorService.guardarAutor(autor);
         if (newAutor != null){
             return new ResponseEntity<>(newAutor, HttpStatus.CREATED);
@@ -32,7 +34,7 @@ public class AutorController {
     }
 
     @PutMapping("/updateAutor/{id}") //PUT
-    public ResponseEntity<AutorEntity> updateAutor(@PathVariable Integer id, @RequestBody AutorEntity newAutor){
+    public ResponseEntity<AutorEntity> updateAutor(@PathVariable Integer id, @RequestBody AutorDto newAutor){
         AutorEntity updateAutor = autorService.editarAutor(id, newAutor);
         if (updateAutor != null){
             return new ResponseEntity<>(updateAutor, HttpStatus.OK);

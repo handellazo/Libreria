@@ -2,6 +2,7 @@ package pe.edu.upeu.libreria.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upeu.libreria.dto.EditorialDto;
 import pe.edu.upeu.libreria.entity.EditorialEntity;
 import pe.edu.upeu.libreria.repository.EditorialInterface;
 import pe.edu.upeu.libreria.service.EditorialService;
@@ -24,17 +25,17 @@ public class EditorialServiceImpl implements EditorialService {
     }
 
     @Override
-    public EditorialEntity guardarEditorial(EditorialEntity editorialEntity) {
+    public EditorialEntity guardarEditorial(EditorialDto editorialDto) {
         EditorialEntity nuevoEditorial = new EditorialEntity();
-        nuevoEditorial.setEditorial(editorialEntity.getEditorial());
+        nuevoEditorial.setEditorial(editorialDto.getEditorial());
         return editorialInterface.save(nuevoEditorial);
     }
 
     @Override
-    public EditorialEntity editarEditorial(int ideditorial, EditorialEntity editorialEntity) {
+    public EditorialEntity editarEditorial(int ideditorial, EditorialDto editorialDto) {
         EditorialEntity editorialEncontrado = editorialInterface.findById(ideditorial).orElse(null);
         if (editorialEncontrado != null){
-            editorialEncontrado.setEditorial(editorialEntity.getEditorial());
+            editorialEncontrado.setEditorial(editorialDto.getEditorial());
             return editorialInterface.save(editorialEncontrado);
         }
         return null;

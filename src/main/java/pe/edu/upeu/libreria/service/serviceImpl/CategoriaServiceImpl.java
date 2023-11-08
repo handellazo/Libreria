@@ -2,6 +2,7 @@ package pe.edu.upeu.libreria.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pe.edu.upeu.libreria.dto.CategoriaDto;
 import pe.edu.upeu.libreria.entity.CategoriaEntity;
 import pe.edu.upeu.libreria.repository.CategoriaInterface;
 import pe.edu.upeu.libreria.service.CategoriaService;
@@ -24,17 +25,18 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
-    public CategoriaEntity guardarCategoria(CategoriaEntity categoriaEntity) {
+    public CategoriaEntity guardarCategoria(CategoriaDto categoriaDto) {
+
         CategoriaEntity nuevoCategoria = new CategoriaEntity();
-        nuevoCategoria.setCategoria(categoriaEntity.getCategoria());
+        nuevoCategoria.setCategoria(categoriaDto.getCategoria());
         return categoriaInterface.save(nuevoCategoria);
     }
 
     @Override
-    public CategoriaEntity editarCategoria(int idcategoria, CategoriaEntity categoriaEntity) {
+    public CategoriaEntity editarCategoria(int idcategoria, CategoriaDto categoriaDto) {
         CategoriaEntity categoriaEncontrado = categoriaInterface.findById(idcategoria).orElse(null);
         if (categoriaEncontrado != null){
-            categoriaEncontrado.setCategoria(categoriaEntity.getCategoria());
+            categoriaEncontrado.setCategoria(categoriaDto.getCategoria());
             return categoriaInterface.save(categoriaEncontrado);
         }
         return null;
