@@ -23,6 +23,12 @@ public class AutorController {
         return new ResponseEntity<>(autores, HttpStatus.OK);
     }
 
+    @GetMapping("/buscarAutorPorId/{idautor}") //GET
+    public ResponseEntity<AutorEntity> buscarAutorPorId(@PathVariable int idautor){
+        AutorEntity autor = autorService.buscarAutorPorID(idautor);
+        return new ResponseEntity<>(autor, HttpStatus.OK);
+    }
+
     @PostMapping("/addAutor")
     public ResponseEntity<AutorEntity> crearAutor(@RequestBody AutorDto autor){
         AutorEntity newAutor = autorService.guardarAutor(autor);

@@ -15,7 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/LECTOR")
-@CrossOrigin({"http://localhost:4200"})
+@CrossOrigin(origins = {"http://localhost:4200, http://localhost:8080 "})
 public class LectorController {
     @Autowired
     private LectorService lectorService;

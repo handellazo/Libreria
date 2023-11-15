@@ -24,7 +24,7 @@ public class AlquilerController {
         return new ResponseEntity<>(alquileres, HttpStatus.OK);
     }
 
-    @GetMapping("/searchLibro/{idalquiler}") //GET
+    @GetMapping("/searchAl/{idalquiler}") //GET
     public ResponseEntity<AlquilerEntity> buscarLibro(@PathVariable Integer idalquiler){
         AlquilerEntity alquiler = alquilerService.buscarAlquilerPorID(idalquiler);
         return new ResponseEntity<>(alquiler, HttpStatus.OK);
